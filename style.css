@@ -1,0 +1,54 @@
+/* 기본 폰트와 배경 설정 */
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background: #f4f4f4;  /* 연한 회색 배경으로 가독성 향상 */
+}
+
+/* 메인 컨테이너 스타일 */
+.container {
+  background: #fff;
+  max-width: 600px;       /* 본문 폭 제한 */
+  margin: 50px auto;      /* 화면 중앙 배치 (위아래 여백 50px, 좌우 auto) */
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);  /* 옅은 그림자 효과 */
+}
+
+/* 헤더 제목 스타일 */
+.container h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* 입력창과 버튼을 가로로 배치 */
+.input-group {
+  display: flex;
+  gap: 10px;              /* 요소 사이 간격 */
+  margin-bottom: 20px;
+}
+.input-group input {
+  flex: 1;                /* 가용 공간을 모두 사용하여 너비 확장 */
+  padding: 8px;
+  font-size: 1em;
+}
+.input-group button {
+  padding: 8px 16px;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+/* 출력 영역 내 제목 및 리스트 스타일 조정 */
+#output h2 {
+  margin: 0 0 10px;       /* 요리명 제목 아래 여백 */
+}
+#output h3 {
+  margin: 15px 0 5px;     /* 소제목 위아래 여백 */
+}
+#output ul, 
+#output ol {
+  margin: 0 0 10px 20px;  /* 리스트 왼쪽 들여쓰기 및 아래 여백 */
+}
+#output p {
+  font-weight: bold;
+}
