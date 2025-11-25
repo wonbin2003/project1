@@ -28,4 +28,4 @@
 
 ## 프로젝트 실행 방법
 
-### 1. GitHub Pages에서 웹 열기
+### 1.Visual Studio Code에서 웹 열기
