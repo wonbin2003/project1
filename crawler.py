@@ -5,6 +5,9 @@ import requests
 from bs4 import BeautifulSoup
 from youtube_transcript_api import YouTubeTranscriptApi, TranscriptsDisabled, NoTranscriptFound
 
+from dotenv import load_dotenv
+load_dotenv()  # .env 파일에서 환경변수 자동 불러오기
+
 
 class CrawlError(Exception):
     pass
