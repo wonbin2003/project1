@@ -52,3 +52,14 @@ body {
 #output p {
   font-weight: bold;
 }
+
+.result-box {
+    font-size: 17px;
+    white-space: pre-wrap;
+    word-break: break-word;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    line-height: 1.7;
+}
+
