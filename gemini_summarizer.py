@@ -3,10 +3,10 @@ import json
 import google.generativeai as genai
 
 
+
 GEMINI_PROMPT_TEMPLATE = """
 너는 요리 레시피를 초보자도 쉽게 따라 할 수 있게 정리하는 전문 어시스턴트이다.
 
-입력으로 주어지는 텍스트는 이미 전처리된 요리 단계 설명이다.
 이 텍스트를 읽고, 아래 JSON 형식에 정확하게 맞추어 한글로 출력하라.
 
 JSON 필드 설명:
@@ -18,13 +18,12 @@ JSON 필드 설명:
 
 반드시 아래 형식의 JSON만 출력하고, 추가 설명이나 코드 블록 기호는 절대 포함하지 마라.
 
-{
-  "recipe_name": "",
+{{
+  "recipeName": "",
   "ingredients": [],
   "steps": [],
-  "time": "",
-  "level": ""
-}
+  "cookingTime": ""
+}}
 
 입력 텍스트는 다음과 같다:
 
@@ -33,25 +32,36 @@ JSON 필드 설명:
 [RECIPE_TEXT_END]
 """
 
-
 def setup_gemini():
     api_key = os.getenv("GEMINI_API_KEY")
     if not api_key:
-        raise RuntimeError("GEMINI_API_KEY 환경 변수가 설정되지 않았습니다.")
+        raise RuntimeError("❌ GEMINI_API_KEY 환경 변수가 설정되지 않았습니다.")
+    
     genai.configure(api_key=api_key)
-    model = genai.GenerativeModel("gemini-1.5-pro")
-    return model
-
+    return genai.GenerativeModel("gemini-2.5-flash")
 
 def summarize_recipe(text: str) -> dict:
     model = setup_gemini()
+
+    # 너무 길면 자르기
     truncated = text[:10000]
     prompt = GEMINI_PROMPT_TEMPLATE.format(recipe_text=truncated)
+
+    # Gemini 호출
     response = model.generate_content(prompt)
-    raw = response.text.strip()
+    raw = response.text or ""
+
+    if not raw.strip():
+        raise ValueError("❌ Gemini가 빈 응답을 반환했습니다.")
+
+    # --- JSON 부분만 자동 추출 ---
     try:
-        data = json.loads(raw)
-    except json.JSONDecodeError:
-        fixed = raw.strip("` \n")
-        data = json.loads(fixed)
-    return data
+        start = raw.index("{")
+        end = raw.rindex("}") + 1
+        json_str = raw[start:end]
+        return json.loads(json_str)
+
+    except Exception as e:
+        print("🔴 Gemini 응답 원본:")
+        print(raw)
+        raise ValueError("❌ JSON 파싱 실패: " + str(e))
