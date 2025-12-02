@@ -3,24 +3,64 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Recipe Summary</title>
-  <!-- 기본 CSS 연결 -->
+  <title>요리 레시피 요약 서비스</title>
   <link rel="stylesheet" href="/static/style.css" />
 </head>
-<body>
-  <div class="container">
-    <h1>요리 레시피 요약</h1>
-    <!-- URL 입력과 버튼 -->
-    <div class="input-group">
-      <input type="url" id="urlInput" placeholder="요리 관련 URL을 입력하세요" />
-      <button id="fetchBtn">요약 보기</button>
-    </div>
-    <!-- 요약 결과 출력 영역 -->
-    <div id="resultArea" class="result-box"></div>
-    <div id="output"></div>
+<body class="app-body">
+  <div class="background-gradient"></div>
+
+  <div class="app-shell">
+    <header class="app-header">
+      <h1 class="app-title">요리 레시피 요약</h1>
+      <p class="app-subtitle">블로그·유튜브 URL 하나로 핵심 레시피만 빠르게 확인</p>
+    </header>
+
+    <main class="main-layout">
+      <section class="glass-card input-card">
+        <label for="urlInput" class="field-label">레시피 URL 입력</label>
+        <div class="input-row">
+          <input
+            type="url"
+            id="urlInput"
+            placeholder="예: 네이버 요리 블로그 또는 유튜브 레시피 URL"
+          />
+          <button id="fetchBtn" class="primary-btn">요약 보기</button>
+        </div>
+        <p class="helper-text">복사한 레시피 주소를 그대로 붙여넣으면 됩니다.</p>
+      </section>
+
+      <section id="resultArea" class="glass-card result-card">
+        아직 레시피를 불러오지 않았습니다.
+      </section>
+
+      <section class="glass-card recommend-card">
+        <h2 class="section-title">보유 재료 기반 레시피 추천</h2>
+        <p class="section-subtitle">집에 있는 재료를 적으면 만들 수 있는 메뉴 예시를 보여줍니다.</p>
+
+        <div class="input-row recommend-input-row">
+          <input
+            type="text"
+            id="ingredientInput"
+            class="app-input"
+            placeholder="예: 김치, 밥, 계란, 대파"
+          />
+          <button id="recommendBtn" class="secondary-btn">
+            예시 추천 보기
+          </button>
+        </div>
+
+        <div id="recommendResult" class="recommend-result">
+          예시) 김치, 밥, 계란을 가지고 있을 때 만들 수 있는 메뉴를 보여줍니다.
+        </div>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <span class="badge">AI 요약</span>
+      <span class="footer-text">FastAPI · Gemini · 웹 크롤링을 활용한 요리 레시피 요약 서비스</span>
+    </footer>
   </div>
 
-  <!-- 스크립트 파일 연결 (본문 끝에 배치하여 로드 후 실행) -->
   <script src="/static/script.js"></script>
 </body>
 </html>
