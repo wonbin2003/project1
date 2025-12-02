@@ -2,7 +2,7 @@ import os
 import json
 import google.generativeai as genai
 
-
+ 
 
 GEMINI_PROMPT_TEMPLATE = """
 너는 요리 레시피를 초보자도 쉽게 따라 할 수 있게 정리하는 전문 어시스턴트이다.
@@ -65,3 +65,4 @@ def summarize_recipe(text: str) -> dict:
         print("🔴 Gemini 응답 원본:")
         print(raw)
         raise ValueError("❌ JSON 파싱 실패: " + str(e))
+
