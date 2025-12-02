@@ -4,7 +4,7 @@ from urllib.parse import urlparse, parse_qs, urljoin
 import requests
 from bs4 import BeautifulSoup
 from youtube_transcript_api import YouTubeTranscriptApi, TranscriptsDisabled, NoTranscriptFound
-
+ 
 from dotenv import load_dotenv
 load_dotenv()  # .env 파일에서 환경변수 자동 불러오기
 
@@ -138,3 +138,4 @@ def crawl_url(url: str) -> str:
     if not text.strip():
         raise CrawlError("블로그 본문 텍스트가 비어 있습니다.")
     return text
+
